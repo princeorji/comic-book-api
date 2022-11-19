@@ -22,7 +22,7 @@ class Series(models.Model):
         return self.name
 
 class Issue(models.Model):
-    name = models.CharField(max_length=25)
+    name = models.CharField(max_length=255)
     issue_number = models.CharField(max_length=25)
     publication_date = models.DateField()
     artist_id = models.ForeignKey('Artist', on_delete=models.CASCADE)
