@@ -2,9 +2,10 @@ import jwt, datetime
 from django.http import Http404
 
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework.permissions import IsAuthenticated
 
 from users.models import * 
 from .serializers import *
@@ -90,6 +91,7 @@ def series(request, pk):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create_series(request):
     try:
         serializer = SeriesSerializer(data=request.data)
@@ -102,6 +104,7 @@ def create_series(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
 def update_series(request, pk):
     series = Series.objects.get(id=pk)
 
@@ -117,6 +120,7 @@ def update_series(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete_series(request, pk):
     try:
         series = Series.objects.get(id=pk)
@@ -147,6 +151,7 @@ def issue(request, pk):
     return Response(serializer.data, status=status.HTTP_200_OK)    
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def create_issue(request):
     try:
         serializer = IssueSerializer(data=request.data)
@@ -159,6 +164,7 @@ def create_issue(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
 def update_issue(request, pk):
     issue = Issue.objects.get(id=pk)
 
@@ -174,6 +180,7 @@ def update_issue(request, pk):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete_issue(request, pk):
     try:
         issue = Issue.objects.get(id=pk)
