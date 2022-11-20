@@ -76,6 +76,50 @@ def logout(request):
     return response
 
 
+# artists
+
+@api_view(['GET'])
+def get_artists(request):
+    artists = Artist.objects.all()
+    serializer = ArtistSerializer(artists, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['GET'])
+def artist(request, pk):
+    artist = Artist.objects.get(id=pk)
+    serializer = ArtistSerializer(artist)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def create_artist(request):
+    try:
+        serializer = ArtistSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+    except:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_artist(request, pk):
+    artist = Artist.objects.get(id=pk)
+
+    try:
+        serializer = ArtistSerializer(instance=artist, data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+
+        return Response(serializer.data)
+
+    except:
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 # series
 
 @api_view(['GET'])

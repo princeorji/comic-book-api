@@ -11,6 +11,12 @@ urlpatterns = [
     path('login/', views.login, name='login'),
     path('logout/', views.logout, name='logout'),
 
+    # artists
+    path('get-artists/', views.get_artists, name='get-artists'),
+    path('artist/<int:pk>/', views.artist, name='artist'),
+    path('create-artist/', views.create_artist, name='create-artist'),
+    path('update-artist/<int:pk>/', views.update_artist, name='update-artist'),
+
     # series
     path('get-series/', views.get_series, name='get-series'),
     path('series/<int:pk>/', views.series, name='series'),
@@ -20,7 +26,7 @@ urlpatterns = [
 
     # issue
     path('series/<int:pk>/issues/', views.get_issues_by_series, name='issues-by-series'),
-    path('issues/<int:pk>/', views.issue, name='issue'),
+    path('issue/<int:pk>/', views.issue, name='issue'),
     path('create-issue/', views.create_issue, name='create-issue'),
     path('update-issue/<int:pk>/', views.update_issue, name='update-issue'),
     path('delete-issue/<int:pk>/', views.delete_issue, name='delete-issue'),

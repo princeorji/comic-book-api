@@ -18,6 +18,11 @@ class UserSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
+class ArtistSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Artist
+        fields = '__all__'
+
 class SeriesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Series
