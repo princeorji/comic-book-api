@@ -6,6 +6,11 @@ app_name = 'api'
 urlpatterns = [
     path('', views.get_routes, name='get-routes'),
 
+    # auth
+    path('register/', views.register, name='register'),
+    path('login/', views.login, name='login'),
+    path('logout/', views.logout, name='logout'),
+
     # series
     path('get-series/', views.get_series, name='get-series'),
     path('series/<int:pk>/', views.series, name='series'),
