@@ -1,5 +1,6 @@
 import jwt, datetime
 from django.http import Http404
+from django.shortcuts import get_object_or_404
 
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -16,6 +17,10 @@ def get_routes(request):
         'register': '/api/register/',
         'login': '/api/login/',
         'logout': '/api/logout/',
+        'get_artists': '/api/get-artists/',
+        'artist': '/api/artist/${id}/',
+        'create_artist': '/api/create-artist/',
+        'update_artist': '/api/update-artist/${id}/',
         'get_series': '/api/get-series/',
         'series': '/api/series/${id}/',
         'create_series': '/api/create-series/',
