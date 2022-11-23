@@ -14,3 +14,4 @@ Thumbs.db
 env/
 frontend/node_modules/
 .env
+.pytest_cache
