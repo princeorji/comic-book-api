@@ -22,15 +22,16 @@ python manage.py runserver
 
 ### Route Paths and Functionality
 
-`/api/get-routes`
+`/api/`
 - GET
   - Returns a 200 response containing all routes and their corresponding urls
-  - Response Body:
+  - Returns:
 
 ```json
 {
   "register": "/api/register/",
   "login": "/api/login/",
+  "refresh_token": "/api/token/refresh/",
   "logout": "/api/logout/",
   "get_artists": "/api/get-artists/",
   "artist": "/api/artist/${id}/",
@@ -42,10 +43,67 @@ python manage.py runserver
   "update_series": "/api/update-series/${id}/",
   "delete_series": "/api/delete-series/${id}/",
   "get_issues_by_series": "/api/series/${id}/issues/",
-  "issue": "/api/issues/${id}/",
+  "issue": "/api/issue/${id}/",
   "create_issue": "/api/create-issue/",
   "update_issue": "/api/update-issue/${id}/",
   "delete_issue": "/api/delete-issue/${id}/"
+}
+```
+
+`/api/register/`
+- POST
+  - Registers new user to the database
+  - Request Body:
+
+```json
+{
+  "username": "example",
+  "email": "example@gmail.com",
+  "password": "ex@mql3"
+}
+```
+
+`/api/login/`
+- POST
+  - Logs user into the system
+  - Generates jwt token for logged in user 
+  - Request Body:
+
+```json
+{
+  "username": "example",
+  "password": "ex@mql3"
+}
+```
+  - Returns:
+
+```json
+{
+  "refresh": "",
+  "access": ""
+}
+```
+
+`/api/token/refresh/`
+- POST
+  - Refreshes already generated token
+  - Requires token generated during login 
+  - Request Body:
+
+```json
+{
+  "refresh": "",
+}
+```
+
+`/api/logout/`
+- POST
+  - Logs user out of the system
+  - Returns:
+  
+```json
+{
+  "message": "Success"
 }
 ```
 

@@ -19,9 +19,11 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 class ArtistSerializer(serializers.ModelSerializer):
+    artist = UserSerializer()
+
     class Meta:
         model = Artist
-        fields = '__all__'
+        exclude = ['id',] 
 
 class SeriesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,6 +31,8 @@ class SeriesSerializer(serializers.ModelSerializer):
         fields = '__all__' 
 
 class IssueSerializer(serializers.ModelSerializer):
+    series_id = SeriesSerializer()
+
     class Meta:
         model = Issue
         fields = '__all__' 

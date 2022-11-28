@@ -1,11 +1,8 @@
-import jwt, datetime
 from django.http import Http404
-from django.shortcuts import get_object_or_404
 
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
-from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.permissions import IsAuthenticated
 
 from users.models import * 
@@ -16,6 +13,7 @@ def get_routes(request):
     api_urls = {
         'register': '/api/register/',
         'login': '/api/login/',
+        'refresh_token': '/api/token/refresh/',
         'logout': '/api/logout/',
         'get_artists': '/api/get-artists/',
         'artist': '/api/artist/${id}/',
@@ -27,7 +25,7 @@ def get_routes(request):
         'update_series': '/api/update-series/${id}/',
         'delete_series': '/api/delete-series/${id}/',
         'get_issues_by_series': '/api/series/${id}/issues/',
-        'issue': '/api/issues/${id}/',
+        'issue': '/api/issue/${id}/',
         'create_issue': '/api/create-issue/',
         'update_issue': '/api/update-issue/${id}/',
         'delete_issue': '/api/delete-issue/${id}/'
@@ -44,40 +42,12 @@ def register(request):
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-@api_view(['POST'])
-def login(request):
-    email = request.data['email']
-    password = request.data['password']
-
-    user = User.objects.filter(email=email).first()
-
-    if user is None:
-        raise AuthenticationFailed('user not found!')
-    if not user.check_password(password):
-        raise AuthenticationFailed('incorrect password!')
-
-    payload = {
-        'id': user.id,
-        'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=60),
-        'iat': datetime.datetime.utcnow()
-    }
-
-    token = jwt.encode(payload, 'secret', algorithm='HS256')
-    response = Response()
-
-    response.set_cookie(key='jwt', value=token, httponly=True)
-
-    response.data = {'jwt': token}
-
-    return response
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 @api_view(['POST'])
 def logout(request):
     response = Response()
-    response.delete_cookie('jwt')
-    response.data = {'message': 'success'}
+    response.data = {'message': 'Success'}
     return response
 
 
