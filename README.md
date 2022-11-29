@@ -78,7 +78,7 @@ python manage.py runserver
 `/api/token/refresh/`
 - POST
   - Refreshes already generated token
-  - Requires token generated during login 
+  - Requires the refresh token generated during login 
   - Request Body:
 
 ```json
@@ -115,7 +115,7 @@ python manage.py runserver
   
 ```json
 {
-  "artist": 1,
+  "user_id": 1,
   "biography": "a new biography string",
   "is_currently_employed": true
 }
@@ -133,7 +133,7 @@ python manage.py runserver
   
 `/api/series/${id}/`
 - GET
-  - Returns a 200 response containing the series with the supplied artist ID on the `series` property of the response body
+  - Returns a 200 response containing the series with the supplied series ID on the `series` property of the response body
   - If a comic series with the supplied artist ID doesn't exist, returns a 404 response
   
 `/api/create-series/`
@@ -174,8 +174,8 @@ python manage.py runserver
   
 `/api/issue/${id}/`
 - GET
-  - Returns a 200 response containing the comic issue with the supplied artist ID on the `issue` property of the response body
-  - If an issue with the supplied artist ID doesn't exist, returns a 404 response
+  - Returns a 200 response containing the comic issue with the supplied issue ID on the `issue` property of the response body
+  - If an issue with the supplied issue ID doesn't exist, returns a 404 response
   
 `/api/create-issue/`
 - POST
