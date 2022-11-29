@@ -25,7 +25,6 @@ python manage.py runserver
 `/api/`
 - GET
   - Returns a 200 response containing all routes and their corresponding urls
-  - Returns:
 
 ```json
 {
@@ -75,14 +74,6 @@ python manage.py runserver
   "password": "ex@mql3"
 }
 ```
-  - Returns:
-
-```json
-{
-  "refresh": "",
-  "access": ""
-}
-```
 
 `/api/token/refresh/`
 - POST
@@ -92,7 +83,7 @@ python manage.py runserver
 
 ```json
 {
-  "refresh": "",
+  "refresh": "token",
 }
 ```
 
@@ -135,7 +126,6 @@ python manage.py runserver
   - Updates the artist with the specified artist ID using the information from the `artist` property of the request body and saves it to the database. Returns a 200 response with the updated artist on the `artist` property of the response body
   - If any required fields are missing, returns a 400 response
   - If an artist with the supplied artist ID doesn't exist, returns a 404 response
-
 
 `/api/get-series/`
 - GET
@@ -224,7 +214,7 @@ python manage.py runserver
 
 ## Testing
 
-To deploy the tests, run
+To deploy the tests, run:
 
 ```bash
 python manage.py test
