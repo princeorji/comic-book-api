@@ -37,8 +37,8 @@ class TaskApiTest(APITestCase):
 
     def test_create_series(self):
         sample_data = {
-            'name': 'Iron Man',
-            'description': 'Billionaire, playboy, philantropist'
+            'name': [],
+            'description': []
         }
         res = self.client.post(reverse('api:create-series'), sample_data)
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)

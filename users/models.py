@@ -7,12 +7,12 @@ class User(AbstractUser):
     pass
 
 class Artist(models.Model):
-    artist = models.ForeignKey('User', on_delete=models.CASCADE)
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
     biography = models.CharField(max_length=225)
     is_currently_employed = models.BooleanField()
 
     def __str__(self):
-        return self.artist.get_username()
+        return self.user_id.get_username()
 
 class Series(models.Model):
     name = models.CharField(max_length=25)
