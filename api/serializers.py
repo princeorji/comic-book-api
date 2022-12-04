@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
         return instance
 
 class ArtistSerializer(serializers.ModelSerializer):
-    artist = UserSerializer()
+    user_id = UserSerializer()
 
     class Meta:
         model = Artist
