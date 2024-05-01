@@ -1,4 +1,4 @@
-# x-press-publishing
+# Comic book api
 
 ### Install Dependencies
 
