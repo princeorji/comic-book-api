@@ -1,5 +1,3 @@
-# Comic book api
-
 ### Install Dependencies
 
 1. **Python 3.10** - Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
